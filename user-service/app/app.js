@@ -1,7 +1,11 @@
+/* eslint-disable no-undef */
 const express = require('express');
-const router = require('./routes/index');
+const router = require('./routes');
 const app = express();
-const port = 3000;
+
+require('dotenv').config();
+
+const port = process.env.APP_PORT || 3000;
 
 app.use(express.json());
 app.use(router);
