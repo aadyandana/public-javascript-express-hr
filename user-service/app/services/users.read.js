@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
-const Read = async () => {
+const userRead = async () => {
     return await User.findAll();
 }
 
-module.exports = Read;
+module.exports = userRead;

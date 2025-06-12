@@ -1,8 +1,10 @@
 const { Router } = require('express');
 const router = Router();
 
-const { UserGetAllController } = require('../controllers/users.controller');
+const { authenticateToken } = require('../utils/jwt');
+const { UserLoginController, UserReadAllController } = require('../controllers/users.controller');
 
-router.get('', UserGetAllController);
+router.post('/login', UserLoginController);
+router.get('', [authenticateToken], UserReadAllController);
 
 module.exports = router;
