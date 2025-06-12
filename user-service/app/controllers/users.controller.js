@@ -2,7 +2,7 @@ const BaseResponse = require('../utils/responses')
 const BaseError = require('../utils/errors')
 
 const userLogin = require('../services/users.login');
-const userRead = require('../services/users.read');
+const userReadOne = require('../services/users.read.one');
 
 const UserLoginController = async (req, res) => {
     try {
@@ -20,13 +20,13 @@ const UserLoginController = async (req, res) => {
     }
 }
 
-const UserReadAllController = async (req, res) => {
+const UserReadOneController = async (req, res) => {
     try {
-        const users = await userRead();
+        const user = await userReadOne({ id: req.user.id }, true);
 
         res.json(new BaseResponse({
-            message: 'Read users successfully',
-            data: users,
+            message: 'Read user detail successfully',
+            data: user,
         }));
     } catch (err) {
         const statusCode = err?.statusCode || 500;
@@ -36,4 +36,4 @@ const UserReadAllController = async (req, res) => {
     }
 }
 
-module.exports = { UserLoginController, UserReadAllController }
+module.exports = { UserLoginController, UserReadOneController }

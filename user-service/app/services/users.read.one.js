@@ -4,12 +4,8 @@ const BaseError = require('../utils/errors');
 const User = require('../models/user');
 
 const userReadOne = async (body, isRequired = false) => {
-    const { username } = body;
-
     const user = await User.findOne({
-        where: {
-            username: username
-        },
+        where: body,
     });
 
     if (isRequired)

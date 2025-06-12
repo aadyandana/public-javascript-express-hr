@@ -11,15 +11,17 @@ const { generateToken } = require('../utils/jwt');
 
 const userLogin = async (body) => {
     const validatedBody = validator(schema, body)
-    const { password } = validatedBody.value;
+    const { username, password } = validatedBody.value;
 
-    const user = await userReadOne(validatedBody.value, true);
+    const user = await userReadOne({ username }, true);
 
     matchPassword(password, user.password)
 
+    const userDto = convert(user)
+
     return {
-        user: convert(user),
-        token: await generateToken(user.dataValues),
+        user: userDto,
+        token: await generateToken(userDto),
     }
 }
 
