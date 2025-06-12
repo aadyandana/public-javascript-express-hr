@@ -9,7 +9,7 @@ const UserLoginController = async (req, res) => {
         const userToken = await userLogin(req.body);
 
         res.json(new BaseResponse({
-            message: 'Login successfully',
+            message: 'Login successful',
             data: userToken,
         }));
     } catch (err) {
@@ -25,7 +25,7 @@ const UserReadOneController = async (req, res) => {
         const user = await userReadOne({ id: req.user.id }, true);
 
         res.json(new BaseResponse({
-            message: 'Read user detail successfully',
+            message: 'Read user detail successful',
             data: user,
         }));
     } catch (err) {
