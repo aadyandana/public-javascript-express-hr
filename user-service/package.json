@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node app.js",
+    "dev": "node app/app.js",
     "sequelize:migration:generate": "sequelize migration:generate",
     "sequelize:migration:migrate": "sequelize db:migrate",
     "sequelize:migration:rollback": "sequelize db:migrate:undo",
