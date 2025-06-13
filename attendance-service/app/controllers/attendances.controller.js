@@ -27,7 +27,7 @@ const AttendanceReadActiveController = async (req, res) => {
     try {
         const attendance = await attendanceReadOne({
             user_id: req.user.id,
-            ...req.params,
+            ...req.query,
             end_time: null,
         });
 

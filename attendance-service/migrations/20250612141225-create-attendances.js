@@ -27,10 +27,15 @@ module.exports = {
         allowNull: true,
         defaultValue: null,
       },
-      paid: {
-        type: Sequelize.BOOLEAN,
+      status: {
+        type: Sequelize.SMALLINT,
         allowNull: false,
-        defaultValue: false,
+        defaultValue: 0,
+      },
+      payroll_session_id: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        defaultValue: null,
       },
       created_at: {
         type: Sequelize.DATE,

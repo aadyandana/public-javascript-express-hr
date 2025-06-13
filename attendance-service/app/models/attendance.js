@@ -2,6 +2,8 @@ const { DataTypes } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const sequelize = require('.');
 
+const ATTENDANCE_STATUS_CODE = require('../utils/enums/AttendanceStatusCode');
+
 const Attendance = sequelize.define('attendances', {
   user_id: {
     type: DataTypes.UUID,
@@ -19,10 +21,15 @@ const Attendance = sequelize.define('attendances', {
     type: DataTypes.DATE,
     allowNull: true
   },
-  paid: {
-    type: DataTypes.BOOLEAN,
+  status: {
+    type: DataTypes.SMALLINT,
     allowNull: false,
-    defaultValue: false,
+    defaultValue: ATTENDANCE_STATUS_CODE.NEW,
+  },
+  payroll_session_id: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    defaultValue: null,
   },
   created_at: {
     type: DataTypes.DATE,

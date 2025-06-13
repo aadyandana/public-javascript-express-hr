@@ -5,24 +5,30 @@ const db = require('../models');
 const validator = require('../utils/validators');
 const schema = require('../utils/validators/attendances.pay.validator');
 
+const ATTENDANCE_STATUS_CODE = require('../utils/enums/AttendanceStatusCode');
 const BaseError = require('../utils/errors');
 const Attendance = require('../models/attendance');
 
 const attendancePay = async (adminId, body) => {
     const validatedBody = validator(schema, body);
-    const { start_date: startDate, end_date: endDate } = validatedBody.value;
+    const {
+        payroll_session_id: payrollSessionId,
+        start_date: startDate,
+        end_date: endDate,
+    } = validatedBody.value;
 
     const transaction = await db.transaction();
     try {
         const [ affectedCount ] = await Attendance.update({
-            paid: true,
+            status: ATTENDANCE_STATUS_CODE.PAID,
+            payroll_session_id: payrollSessionId,
             updated_by: adminId,
         }, {
             where: {
                 date: {
                     [Op.between]: [startDate, endDate],
                 },
-                paid: false,
+                status: ATTENDANCE_STATUS_CODE.NEW,
             },
         }, { transaction: transaction });
 

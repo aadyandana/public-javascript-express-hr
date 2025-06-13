@@ -45,6 +45,7 @@ const payrollSessionUpdate = async (token, userId, id, body) => {
 
 const payAttendance = async (token, payrollSession) => {
     await axios.patch(`${process.env.ATTENDANCE_SERVICE_URL}/attendances/pay`, {
+        payroll_session_id: payrollSession.id,
         start_date: payrollSession.start_date,
         end_date: payrollSession.end_date,
     }, {
