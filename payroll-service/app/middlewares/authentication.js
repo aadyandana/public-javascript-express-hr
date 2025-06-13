@@ -37,6 +37,7 @@ const authenticateToken = async (req, res, next) => {
             //     })
 
             req.user = responseData.data;
+            req.token = token;
 
             next();
         })

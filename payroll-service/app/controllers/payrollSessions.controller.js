@@ -58,7 +58,7 @@ const PayrollSessionReadOneController = async (req, res) => {
 
 const PayrollSessionUpdateController = async (req, res) => {
     try {
-        const payrollSession = await payrollSessionUpdate(req.user.id, req.params.id, req.body);
+        const payrollSession = await payrollSessionUpdate(req.token, req.user.id, req.params.id, req.body);
 
         res.json(new BaseResponse({
             message: 'Update payroll session successful',

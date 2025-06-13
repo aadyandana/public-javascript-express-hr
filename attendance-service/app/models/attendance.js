@@ -19,6 +19,11 @@ const Attendance = sequelize.define('attendances', {
     type: DataTypes.DATE,
     allowNull: true
   },
+  paid: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,
