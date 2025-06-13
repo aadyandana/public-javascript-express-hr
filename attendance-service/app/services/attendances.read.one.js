@@ -10,7 +10,10 @@ const attendanceReadOne = async (body, isRequired = false) => {
     const validatedBody = validator(schema, body);
 
     const attendance = await Attendance.findOne({
-        where: validatedBody.value,
+        where: {
+            ...validatedBody.value,
+            paid: false,
+        }
     });
 
     if (isRequired)
