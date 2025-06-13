@@ -4,6 +4,7 @@ const BaseResponse = require('../utils/responses')
 const BaseError = require('../utils/errors')
 
 const attendanceCreateOrUpdate = require('../services/attendances.create.or.update');
+const attendanceReadOne = require('../services/attendances.read.one');
 const attendancePay = require('../services/attendances.pay');
 
 const AttendanceCreateOrUpdateController = async (req, res) => {
@@ -12,6 +13,26 @@ const AttendanceCreateOrUpdateController = async (req, res) => {
 
         res.status(StatusCodes.CREATED).json(new BaseResponse({
             message: 'Create or update attendance successful',
+            data: attendance,
+        }));
+    } catch (err) {
+        const statusCode = err?.statusCode || 500;
+        const response = err?.response || new BaseError().response;
+
+        res.status(statusCode).json(response);
+    }
+}
+
+const AttendanceReadActiveController = async (req, res) => {
+    try {
+        const attendance = await attendanceReadOne({
+            user_id: req.user.id,
+            ...req.params,
+            end_time: null,
+        });
+
+        res.json(new BaseResponse({
+            message: 'Read attendance detail successful',
             data: attendance,
         }));
     } catch (err) {
@@ -38,4 +59,10 @@ const AttendancePayController = async (req, res) => {
     }
 }
 
-module.exports = { AttendanceCreateOrUpdateController, AttendancePayController }
+
+
+module.exports = {
+    AttendanceCreateOrUpdateController,
+    AttendanceReadActiveController,
+    AttendancePayController
+}
