@@ -1,1 +1,1 @@
-# public-typescript-express-hr
+# public-javascript-express-hr
