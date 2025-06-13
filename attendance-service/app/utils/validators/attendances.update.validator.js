@@ -1,5 +1,6 @@
 const joi = require('joi');
 
 module.exports = joi.object({
-    end_time: joi.date().iso().optional(),
+    start_time: joi.date().iso().required(),
+    end_time: joi.date().iso().greater(joi.ref('start_time')).required(),
 });

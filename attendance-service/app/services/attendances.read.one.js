@@ -7,7 +7,7 @@ const BaseError = require('../utils/errors');
 const Attendance = require('../models/attendance');
 
 const attendanceReadOne = async (body, isRequired = false) => {
-const validatedBody = validator(schema, body);
+    const validatedBody = validator(schema, body);
 
     const attendance = await Attendance.findOne({
         where: validatedBody.value,

@@ -10,7 +10,7 @@ const AttendanceCreateOrUpdateController = async (req, res) => {
         const attendance = await attendanceCreateOrUpdate(req.user, req.body);
 
         res.status(StatusCodes.CREATED).json(new BaseResponse({
-            message: 'Create attendance successful',
+            message: 'Create or update attendance successful',
             data: attendance,
         }));
     } catch (err) {

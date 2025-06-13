@@ -23,7 +23,7 @@ const authenticateToken = async (req, res, next) => {
         .then(function(response) {
             const responseData = response.data;
 
-            if (!responseData.status)
+            if (!responseData?.status)
                 throw new BaseError({
                     statusCode: StatusCodes.UNAUTHORIZED,
                     message: 'User not found',
@@ -36,7 +36,7 @@ const authenticateToken = async (req, res, next) => {
         .catch(function(err) {
             throw new BaseError({
                 statusCode: err?.status || StatusCodes.UNAUTHORIZED,
-                message: err?.response?.data?.message || 'Cannot fetch user',
+                message: err?.response?.data?.message || err?.message || 'Cannot fetch user',
             })
         });
     } catch (err) {

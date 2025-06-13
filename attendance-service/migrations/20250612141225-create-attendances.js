@@ -35,7 +35,6 @@ module.exports = {
       created_by: {
         type: Sequelize.UUID,
         allowNull: false,
-        defaultValue: null,
       },
       updated_at: {
         type: Sequelize.DATE,
@@ -45,7 +44,6 @@ module.exports = {
       updated_by: {
         type: Sequelize.UUID,
         allowNull: false,
-        defaultValue: null,
       },
     });
   },
